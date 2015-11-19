@@ -1,0 +1,59 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://maven.bughd.com/public"
+        }
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-nexus-plugin:0.3'
+    }
+}
+
+apply plugin: 'groovy'
+apply from: '../gradle-mvn-push.gradle'
+
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
+
+dependencies {
+    repositories {
+        mavenCentral()
+        maven {
+            url "http://maven.bughd.com/public"
+        }
+
+    }
+    compile 'im.fir:fir-http:0.0.1'
+
+    compile gradleApi()
+    compile 'net.dongliu:apk-parser:2.0.15'
+    compile 'com.android.tools.build:gradle:1.3.0'
+    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
+}
+
+//afterEvaluate { project ->
+//    uploadArchives {
+//        repositories {
+//            mavenDeployer {
+//
+//                pom.project {
+//                    developers {
+//                        developer {
+//                            id 'bhurling'
+//                            name 'Cape Gao'
+//                        }
+//
+//                    }
+//                }
+//
+//                pom.whenConfigured { pom ->
+//                    pom.dependencies = pom.dependencies.findAll { dep ->
+//                        dep.scope != 'test'
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
