@@ -32,6 +32,7 @@ import im.fir.module.User;
 
 public class FirClient {
 	private static final Log log = LogFactory.getLog(FirClient.class);
+	private static final String FIR_GRADLE_PLUGIN_VERSION = "1.0.0";
 
 	private static final String GET_USER_INFO = "http://api.fir.im/user";
 	private static final String UPLOAD_MAPPING = "http://api.bughd.com/full_versions";
@@ -48,6 +49,8 @@ public class FirClient {
 	public UploadInfo getUploadInfo(String type, String bundleId, String token) throws FirDeployException {
 		HttpPost httpPost = new HttpPost("http://api.fir.im/apps");
 		try {
+			httpPost.setHeader("source", "fir-gradle-plugin");
+			httpPost.setHeader("version", FIR_GRADLE_PLUGIN_VERSION);
 			MultipartEntity entity = new MultipartEntity();
 			addParam(entity, "api_token", token);
 			addParam(entity, "type", type);
@@ -95,6 +98,8 @@ public class FirClient {
 	public User doCheckToken(String token) throws IOException {
 		resetHttpConnection();
 		HttpGet httpGet = new HttpGet("http://api.fir.im/user?token=" + token);
+		httpGet.setHeader("source", "fir-gradle-plugin");
+		httpGet.setHeader("version", FIR_GRADLE_PLUGIN_VERSION);
 		HttpResponse response = this.httpClient.execute(httpGet);
 
 		int statusCode = response.getStatusLine().getStatusCode();
@@ -280,9 +285,11 @@ public class FirClient {
 		addParam(entity, "x:changelog", app.getChangeLog());
 		ContentBody cbFile = new FileBody(new File(app.getAppPath()));
 		entity.addPart("file", cbFile);
-		HttpPost httppost = new HttpPost(binary.getUpLoadUrl());
-		httppost.setEntity(entity);
-		return httppost;
+		HttpPost httpPost = new HttpPost(binary.getUpLoadUrl());
+		httpPost.setHeader("source", "fir-gradle-plugin");
+		httpPost.setHeader("version", FIR_GRADLE_PLUGIN_VERSION);
+		httpPost.setEntity(entity);
+		return httpPost;
 	}
 
 	protected HttpPost createMappingHttpPost(Mapping mapping, App app) throws UnsupportedEncodingException {
@@ -299,9 +306,11 @@ public class FirClient {
 
 		String url = "http://api.bughd.com/projects/" + mapping.getProjectId() + "/full_versions";
 		System.out.println(url);
-		HttpPost httppost = new HttpPost(url);
-		httppost.setEntity(entity);
-		return httppost;
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setHeader("source", "fir-gradle-plugin");
+		httpPost.setHeader("version", FIR_GRADLE_PLUGIN_VERSION);
+		httpPost.setEntity(entity);
+		return httpPost;
 	}
 
 	// protected HttpPost createMappingHttpPost(Mapping mapping) throws
@@ -327,9 +336,11 @@ public class FirClient {
 		addParam(entity, "key", icon.getKey());
 		addParam(entity, "token", icon.getToken());
 		entity.addPart("file", cbFile);
-		HttpPost httppost = new HttpPost(icon.getUpLoadUrl());
-		httppost.setEntity(entity);
-		return httppost;
+		HttpPost httpPost = new HttpPost(icon.getUpLoadUrl());
+		httpPost.setHeader("source", "fir-gradle-plugin");
+		httpPost.setHeader("version", FIR_GRADLE_PLUGIN_VERSION);
+		httpPost.setEntity(entity);
+		return httpPost;
 	}
 
 	
