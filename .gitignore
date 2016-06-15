@@ -4,5 +4,12 @@
 /.idea/libraries
 .DS_Store
 /build
+/lib/build
 /captures
 gradle.properties
+build
+.idea
+*.iml
+.gradle
+local.properties
+lib/build/*

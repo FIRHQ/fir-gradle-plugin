@@ -1,10 +1,9 @@
 package im.fir.gradle
-
 import com.android.build.gradle.api.ApkVariantOutput
+import com.android.builder.model.ProductFlavor
 import im.fir.module.App
 import im.fir.module.Mapping
 import net.dongliu.apk.parser.ApkParser
-import net.dongliu.apk.parser.bean.ApkMeta
 import net.dongliu.apk.parser.bean.Icon
 import org.gradle.api.tasks.TaskAction
 
@@ -16,12 +15,22 @@ class FirPublishApkTask extends FirPublishTask {
     @TaskAction
     publishApk() {
         super.publish()
-
+        String changeLog;
         def apkOutput = variant.outputs.find { variantOutput -> variantOutput instanceof ApkVariantOutput }
         String apkPath = apkOutput.outputFile.getAbsolutePath()
+        Iterator<ProductFlavor> iterator = variant.productFlavors.iterator();
+        while ( iterator.hasNext()){
+          ProductFlavor flavor =  iterator.next();
+           Map<String, Object> map = flavor.getManifestPlaceholders();
+            if (map.containsKey("FIR_CHANGE_LOG_VALUE")){
+                changeLog = map.get("FIR_CHANGE_LOG_VALUE");
+            }
+        }
         parseApk(apkPath,app);
         app.setAppPath(apkPath)
-        if(firExtension.changeLog != null){
+        if (changeLog){
+            app.setChangeLog(changeLog);
+        } else if(firExtension.changeLog != null){
             app.setChangeLog(firExtension.changeLog);
         }
         Mapping mapping =null;
@@ -45,7 +54,7 @@ class FirPublishApkTask extends FirPublishTask {
 //            newTrack.setUserFraction(extension.userFraction)
 //        }
 //        edits.tracks()
-//                .update(variant.applicationId, editId, extension.track, newTrack)
+//                .update(variant.applicationId, ed itId, extension.track, newTrack)
 //                .execute()
 //
 //        if (inputFolder.exists()) {

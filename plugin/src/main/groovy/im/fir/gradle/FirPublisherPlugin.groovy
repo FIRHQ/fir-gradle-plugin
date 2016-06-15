@@ -1,7 +1,5 @@
 package im.fir.gradle
-
 import com.android.build.gradle.AppPlugin
-import org.apache.commons.lang.StringUtils
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -28,7 +26,7 @@ class FirPublisherPlugin implements Plugin<Project> {
                 }
 
                 if (firExtension == null) {
-                    log.warn("Please config your fir.im apiToken in your build.gradle.")
+                    log.error("Please config your fir.im apiToken in your build.gradle.")
                     return
                 }
                 def buildTypeName = variant.buildType.name.capitalize()

@@ -1,1 +1,1 @@
-include ':plugin', ':lib', ':fir-http'
+include ':plugin', ':lib'
