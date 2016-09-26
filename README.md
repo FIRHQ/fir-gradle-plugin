@@ -36,7 +36,7 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
 		//可选 如需实现自动上传符号表到 BugHD 功能，为必填项
 		bughd{
     		projectId '替换为你的 BugHD PROJECT_ID'
-    		apiToken '替换为你的 BugHD API_TOKEN'
+    		apiToken '替换为你的 BugHD API_TOKEN'
 		}
 
 
