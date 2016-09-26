@@ -22,7 +22,7 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
         }
 
 * 在要集成的项目的 build.gradle 中添加配置，如下：
-
+```
  		apply plugin:'im.fir.plugin.gradle'// 必填
 		fir{
 
@@ -56,7 +56,7 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
                signingConfig signingConfigs.release
     		}
 		}
-
+```
 
 **以上信息中有部分内容需要替换配置才能生效，需要替换的信息有以下几个：**
 
