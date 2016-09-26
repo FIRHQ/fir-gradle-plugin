@@ -32,7 +32,7 @@ import im.fir.module.User;
 
 public class FirClient {
 	private static final Log log = LogFactory.getLog(FirClient.class);
-	private static final String FIR_GRADLE_PLUGIN_VERSION = "1.0.1";
+	private static final String FIR_GRADLE_PLUGIN_VERSION = "1.0.7";
 
 	private static final String GET_USER_INFO = "http://api.fir.im/user";
 	private static final String UPLOAD_MAPPING = "http://api.bughd.com/full_versions";

@@ -20,10 +20,10 @@ class FirPublisherPlugin implements Plugin<Project> {
             def bugHdExtension = project.extensions.create('bughd', BugHdPublisherPluginExtension)
 
             project.android.applicationVariants.all { variant ->
-                if (variant.buildType.isDebuggable()) {
-                    log.debug("Skipping debuggable build type ${variant.buildType.name}.")
-                    return
-                }
+//                if (variant.buildType.isDebuggable()) {
+//                    log.debug("Skipping debuggable build type ${variant.buildType.name}.")
+//                    return
+//                }
 
                 if (firExtension == null) {
                     log.error("Please config your fir.im apiToken in your build.gradle.")
@@ -44,8 +44,6 @@ class FirPublisherPlugin implements Plugin<Project> {
 //                def playResourcesTaskName = "generate${variationName}PlayResources"
                 def publishApkTaskName = "publishApk${variationName}"
                 def outputData = variant.outputs.first()
-                def zipAlignTask = outputData.zipAlign
-
                 def assembleTask = variant.assemble
 
                 def variantData = variant.variantData
@@ -89,7 +87,8 @@ class FirPublisherPlugin implements Plugin<Project> {
 //                // Attach tasks to task graph.
 //                publishListingTask.dependsOn playResourcesTask
 
-                if (zipAlignTask && variantData.zipAlignEnabled) {
+                log.warn("variantData.zipAlignEnabled === >" + variantData.zipAlignEnabled);
+                if (variantData.zipAlignEnabled) {
                     // Create and configure publisher apk task for this variant.
                     log.warn("publishApkTaskName === " + publishApkTaskName);
 
@@ -102,7 +101,7 @@ class FirPublisherPlugin implements Plugin<Project> {
                     publishApkTask.variant = variant
 //                    publishApkTask.inputFolder = playResourcesTask.outputFolder
                     publishApkTask.description = "Uploads the APK for the ${variationName} build"
-                    publishApkTask.group = FIR_IM_GROUP
+                    publishApkTask.group  = FIR_IM_GROUP
 
 //                    def publishTask = project.tasks.create(publishTaskName)
 //                    publishTask.description = "Updates APK and play store listing for the ${variationName} build"

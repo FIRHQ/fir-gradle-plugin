@@ -4,8 +4,10 @@ package im.fir.module;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.ObjectMapper;
 
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class UploadInfo {
 	private static ObjectMapper jsonMapper = new ObjectMapper();
+
 	@JsonProperty("id")
 	private String mId;
 	@JsonProperty("type")
