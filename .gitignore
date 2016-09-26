@@ -8,8 +8,12 @@
 /captures
 gradle.properties
 build
+.idea/*
 .idea
 *.iml
 .gradle
 local.properties
 lib/build/*
+compiler.xml
+modules.xml
+vcs.xml

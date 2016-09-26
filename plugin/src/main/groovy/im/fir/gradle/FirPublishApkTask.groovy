@@ -16,16 +16,21 @@ class FirPublishApkTask extends FirPublishTask {
     publishApk() {
         super.publish()
         String changeLog;
+        def log = project.logger;
+
         def apkOutput = variant.outputs.find { variantOutput -> variantOutput instanceof ApkVariantOutput }
+
         String apkPath = apkOutput.outputFile.getAbsolutePath()
+        log.warn("apkPath ===> " + apkPath)
         Iterator<ProductFlavor> iterator = variant.productFlavors.iterator();
         while ( iterator.hasNext()){
           ProductFlavor flavor =  iterator.next();
-           Map<String, Object> map = flavor.getManifestPlaceholders();
+            log.warn("flavor ===> " + flavor.getName());
+            Map<String, Object> map = flavor.getManifestPlaceholders();
             if (map.containsKey("FIR_CHANGE_LOG_VALUE")){
                 changeLog = map.get("FIR_CHANGE_LOG_VALUE");
-            }
-        }
+
+        }}
         parseApk(apkPath,app);
         app.setAppPath(apkPath)
         if (changeLog){

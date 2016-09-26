@@ -1,108 +1,133 @@
-#使用Gradle Plugin发布应用到fir.im
+fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，简单快速。除此之外，还可以上传符号表到 BugHD。
 
-***
+下面来看下如何配置、使用 Gradle Plugin。
 
-###配置 
-* 项目的 build.gradle（Top-level build.gradle，项目最外层的 build.gradle 文件）中添加，例如:
-		
+## 开始配置
+* 在项目的 build.gradle（Top-level build.gradle，项目最外层的 build.gradle 文件）中添加，例如:
+
 		buildscript {
   			repositories {
-   				jcenter() 
-   				  			 
-   				//添加maven源  	
-    			maven { 
-           			url "http://maven.bughd.com/public"
-    			}
-  			}
-  			dependencies {
-        		classpath 'com.android.tools.build:gradle:1.3.0'
-        		
-        		//添加fir插件依赖
-        		classpath 'im.fir:gradle-fir-publisher:1.0.0'
-   			}
-  		} 
- * 在要集成的项目中的 build.gradle 中添加配置，如下：
- 		
- 		.....
- 		
- 		
- 		apply plugin: 'im.fir.plugin.gradle'
- 		
- 		//必填 
+   				jcenter()
+   		   //添加fir maven源
+    	        maven {
+           	  url "http://maven.bughd.com/public"
+    	        }
+                 ...
+  	       }
+              dependencies {
+                classpath 'com.android.tools.build:gradle:2.2.0'
+   			 //添加fir插件依赖
+        		classpath 'im.fir:gradle-fir-publisher:1.0.7'
+              }
+        }
+
+* 在要集成的项目的 build.gradle 中添加配置，如下：
+
+ 		apply plugin: 'im.fir.plugin.gradle'// 必填
 		fir{
-		 	//必填 上传fir.im apk字段，否则无法上传APP到fir.im
-    		apiToken 'CONFIG YOUR FIR.IM API_TOKEN'
-    		// 可选 上传fir.im 中显示的changelog
-    		changeLog 'from fir.im gradle plugin'
+
+        //必填 上传 fir.im apk 字段，否则无法上传 APP 到 fir.im
+    		apiToken '替换为你的 fir.im API_TOKEN'
+
+    	//可选 上传fir.im 中显示的changelog
+    		changeLog '替换为你的更新日志'
 		}
-		
-		//可选 将每次打包 混淆代码生成的符号表自动上传到bughd.com
+
+		//可选 如需实现自动上传符号表到 BugHD 功能，为必填项
 		bughd{
-    		projectId 'CONFIG YOUR BUGHD.COM PROJECT_ID'
-    		apiToken 'CONFIG YOUR BUGHD.COM API_TOKEN'
+    		projectId '替换为你的 BugHD PROJECT_ID'
+    		apiToken '替换为你的 BugHD API_TOKEN'
 		}
-		
-		
-		
+
+
 		//注意
 		buildTypes {
-		 
-		 	debug {
+
+		debug {
             	signingConfig signingConfigs.debug
         	}
-        	
-			//需要添加release配置
+
+		//需要添加 release 配置
         	release {
-        	    //需要打开混淆配置bughd中的项目中才能上传符号表
+        	   //混淆配置打开时，才会自动上传符号表到 BugHD
             	minifyEnabled true
-            	proguardFiles getDefaultProguardFile('proguardandroid.txt'), 'proguard-rules.pro'
-            	//需要使用正式证书签名，才能发布到fir.im
-            	signingConfig signingConfigs.release
+                proguardFiles getDefaultProguardFile('proguardandroid.txt'),  'proguard-rules.pro'
+               //配置正式版签名证书信息，否则上传release版本是unsigned_apk，导致无法安装。
+               signingConfig signingConfigs.release
     		}
 		}
 
-		
-		....
-		
-		
+
+**以上信息中有部分内容需要替换配置才能生效，需要替换的信息有以下几个：**
+
+- 1.fir.im 的 apiToken （必填）
+- 2.fir.im 的 changeLog （可选）
+- 3.BugHD 的 projectID （需要自动上传符号表功能时为必选）
+- 4.BugHD 的 apiToken（需要自动上传符号表功能时为必选）
+- 5.buildTypes 中的 release 配置仅为示例，可根据项目的实际情况修改相应配置
+
+### 相关提示：
+
+#### 1. 查看 fir.im api_token
+
+**作用：** fir.im 上传 APP 的调用权限
+
+**注意：** 如果需要自动上传应用为必填项
+
+**查看方法：直接点击 [API token](http://fir.im/apps/apitoken) 进行查看.
+
+<img src="http://7xju1s.com1.z0.glb.clouddn.com/image/6/cb/65b727983a7f4e6aa6d7464757d5d.png" width = "100%"  alt="fir.im" align=center />
 
 
-##### *提示：*
+#### 2. 查看BugHD api_token
 
-###### 查看fir.im api_token
-***
+**作用：** BugHD上传 mapping.txt/dSYM 文件的调用权限
 
-请访问 [fir.im](http://fir.im/apps)，登录后，点击头像 选择 **API token** 进行查看
-![ScreenShot](http://ww1.sinaimg.cn/large/6f260d67jw1exvzwzkfkrj20ye0hwmza.jpg)
+**注意：** 如果不需要上传混淆表不需要填写
 
-###### 查看BugHD api_token
-***
+**查看方法：**请访问 [BugHD API token](http://bughd.com/account)，登录后，进行查看.
 
- **作用：** BugHD上传 ** *mapping.txt/dSYM* ** 文件API调用权限
- **注意：** 如果不需要上传混淆表不需要填写
- 查看方法：请访问 [BugHD API token](http://bughd.com/account)，登录后，进行查看
- 	
- ![ScreenShot](http://ww4.sinaimg.cn/large/6f260d67jw1exvzyp9z2xj20nl0cwjs8.jpg)
- 
+<img src="http://ww4.sinaimg.cn/large/6f260d67jw1exvzyp9z2xj20nl0cwjs8.jpg" width = "100%"  alt="fir.im" align=center />
 
-###### 查看BugHD project ID
-***
-  
-**作用：** 判断上传到具体到哪个bughd.com项
- 
-**注意：** 如果填写过BugHD token后，该选项为必填
+#### 3. 查看BugHD project ID
 
-**查看方法：** 请访问 [BugHD Projects](http://bughd.com/projects)，登录后，找到你要上传符号表的项目后，进入该项目， 并选择 ** *项目设置* ** 选项卡，进行查看
-![ScreenShot](http://ww1.sinaimg.cn/large/6f260d67jw1exvzzdv0dcj20n50ccjs5.jpg)
+**作用：** 判断上传到具体到哪个 BugHD 的项目
+
+**注意：** 如果填写过 BugHD apiTOken 后，该选项为必填
+
+**查看方法：** 请访问 [BugHD Projects](http://bughd.com/projects)，登录后找到你要上传符号表的项目后，进入该项目， 并选择 *项目设置* 选项卡，进行查看。
+
+<img src="http://ww1.sinaimg.cn/large/6f260d67jw1exvzzdv0dcj20n50ccjs5.jpg" width = "100%"  alt="fir.im" align=center />
+
+###开始使用
+
+首先，运行下./gradlew tasks 查看下插件是否已经集成成功，查看输出的Log里是否存在Fir.im tasks,如果看到以下截图，说明插件已经配置成功：
+
+<img src="http://ww1.sinaimg.cn/large/801b780ajw1f86wefgl0ej20rf0dd434.jpg" width = "100%"  alt="fir.im" align=center />
+
+然后根据自己要上传的apk选择对应的gradle命令就可以了。
+
+例如我要上传生成出来的fir渠道的release类型的apk,只需要输入
+
+    ./gradlew publishApkFirRelease
+
+或者我要上传生成出来的fir渠道的debug类型的apk,只需要输入
+
+    ./gradlew publishApkFirDebug
+
+ 如果build.gradle里没有配置多渠道信息，默认的上传命令会变成：
+
+    ./gradlew publishApkDebug
+
+   或者
+
+    ./gradlew publishApkRelease
 
 
-###使用
 
-配置成功后，只需要如下的一条命令就可以发布应用到fir.im：
+>注意
 
-	gradle publishApkRelease 
+> - publishApkXXX 任务依附于 gradle 的 assembleTask，**如果要上传Release版本需要配置正式版本的签名。意味着需要在工程的 build.gradle 的 buildTypes 中添加 release 配置签名信息并对 APK 签名，该插件才会正常运行，否则上传的apk是unsign-release，会导致手机无法安装**。
 
-** 注意 ** 
+> - 使用 Gradle Plugin 上传符号表到 BugHD 时，需要在工程的 build.gradle 的 buildTypes 中添加 release 打开混淆配置，才会自动上传符号表到 BugHD。
 
-* publishApkRelease任务依附于gradle的assembleTask，也就意味着需要在工程的build.gradle中的buildTypes添加release配置并对APK签名，该插件才会正常运行。
-*  需要在工程的build.gradle中的buildTypes添加release中打开混淆配置 bughd中的项目中才能上传符号表。

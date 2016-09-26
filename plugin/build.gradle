@@ -26,10 +26,10 @@ dependencies {
     }
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
-    compile 'im.fir:fir-http:0.0.3'
+    compile 'im.fir:fir-http:0.0.7'
     compile gradleApi()
-    compile 'net.dongliu:apk-parser:2.1.2'
-    compile 'com.android.tools.build:gradle:2.1.0'
+    compile 'net.dongliu:apk-parser:2.1.6'
+    compile 'com.android.tools.build:gradle:2.2.0'
     compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
 }
 

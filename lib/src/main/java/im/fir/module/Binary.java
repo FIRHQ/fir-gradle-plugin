@@ -3,6 +3,7 @@ package im.fir.module;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Binary {
 	@JsonProperty("key")
 	private String mKey;
