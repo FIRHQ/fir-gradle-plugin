@@ -23,20 +23,20 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
 
 * 在要集成的项目的 build.gradle 中添加配置，如下：
 
- 		apply plugin: 'im.fir.plugin.gradle'// 必填
+ 		apply plugin:'im.fir.plugin.gradle'// 必填
 		fir{
 
         //必填 上传 fir.im apk 字段，否则无法上传 APP 到 fir.im
     		apiToken '替换为你的 fir.im API_TOKEN'
 
     	//可选 上传fir.im 中显示的changelog
-    		changeLog '替换为你的更新日志'
+    		changeLog '替换为你的更新日志'
 		}
 
 		//可选 如需实现自动上传符号表到 BugHD 功能，为必填项
 		bughd{
-    		projectId '替换为你的 BugHD PROJECT_ID'
-    		apiToken '替换为你的 BugHD API_TOKEN'
+    		projectId '替换为你的 BugHD PROJECT_ID'
+    		apiToken '替换为你的 BugHD API_TOKEN'
 		}
 
 
@@ -66,7 +66,7 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
 - 4.BugHD 的 apiToken（需要自动上传符号表功能时为必选）
 - 5.buildTypes 中的 release 配置仅为示例，可根据项目的实际情况修改相应配置
 
-### 相关提示：
+##相关提示：
 
 #### 1. 查看 fir.im api_token
 
