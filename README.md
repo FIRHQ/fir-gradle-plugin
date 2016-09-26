@@ -27,7 +27,7 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
 		fir{
 
         //必填 上传 fir.im apk 字段，否则无法上传 APP 到 fir.im
-    		apiToken '替换为你的 fir.im API_TOKEN'
+    		apiToken'替换为你的 fir.im API_TOKEN'
 
     	//可选 上传fir.im 中显示的changelog
     		changeLog '替换为你的更新日志'
@@ -57,7 +57,6 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
     		}
 		}
 ```
-
 **以上信息中有部分内容需要替换配置才能生效，需要替换的信息有以下几个：**
 
 - 1.fir.im 的 apiToken （必填）
@@ -72,9 +71,9 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
 
 **作用：** fir.im 上传 APP 的调用权限
 
-**注意：** 如果需要自动上传应用为必填项
+**注意：** 如果需要自动上传应用为必填项
 
-**查看方法：直接点击 [API token](http://fir.im/apps/apitoken) 进行查看.
+**查看方法:** 直接点击 [API token](http://fir.im/apps/apitoken) 进行查看.
 
 <img src="http://7xju1s.com1.z0.glb.clouddn.com/image/6/cb/65b727983a7f4e6aa6d7464757d5d.png" width = "100%"  alt="fir.im" align=center />
 
@@ -91,9 +90,9 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
 
 #### 3. 查看BugHD project ID
 
-**作用：** 判断上传到具体到哪个 BugHD 的项目
+**作用：** 判断上传到具体到哪个 BugHD 的项目
 
-**注意：** 如果填写过 BugHD apiTOken 后，该选项为必填
+**注意：** 如果填写过 BugHD apiToken后，该选项为必填
 
 **查看方法：** 请访问 [BugHD Projects](http://bughd.com/projects)，登录后找到你要上传符号表的项目后，进入该项目， 并选择 *项目设置* 选项卡，进行查看。
 
