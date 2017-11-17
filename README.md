@@ -66,7 +66,7 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
 
 ### 相关提示：
 
-#### 1. 查看 fir.im api_token
+#### 查看 fir.im api_token
 
 **作用：** fir.im 上传 APP 的调用权限
 
@@ -75,18 +75,6 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
 **查看方法：直接点击 [API token](http://fir.im/apps/apitoken) 进行查看.
 
 <img src="http://7xju1s.com1.z0.glb.clouddn.com/image/6/cb/65b727983a7f4e6aa6d7464757d5d.png" width = "100%"  alt="fir.im" align=center />
-
-
-#### 2. 查看BugHD api_token
-
-**作用：** BugHD上传 mapping.txt/dSYM 文件的调用权限
-
-**注意：** 如果不需要上传混淆表不需要填写
-
-**查看方法：**请访问 [BugHD API token](http://bughd.com/account)，登录后，进行查看.
-
-<img src="http://ww4.sinaimg.cn/large/6f260d67jw1exvzyp9z2xj20nl0cwjs8.jpg" width = "100%"  alt="fir.im" align=center />
-
 
 
 ###开始使用
