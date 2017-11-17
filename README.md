@@ -1,4 +1,4 @@
-fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，简单快速。除此之外，还可以上传符号表到 BugHD。
+fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，简单快速。
 
 下面来看下如何配置、使用 Gradle Plugin。
 
@@ -62,9 +62,7 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
 
 - 1.fir.im 的 apiToken （必填）
 - 2.fir.im 的 changeLog （可选）
-- 3.BugHD 的 projectID （需要自动上传符号表功能时为必选）
-- 4.BugHD 的 apiToken（需要自动上传符号表功能时为必选）
-- 5.buildTypes 中的 release 配置仅为示例，可根据项目的实际情况修改相应配置
+- 3.buildTypes 中的 release 配置仅为示例，可根据项目的实际情况修改相应配置
 
 ### 相关提示：
 
@@ -89,15 +87,7 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
 
 <img src="http://ww4.sinaimg.cn/large/6f260d67jw1exvzyp9z2xj20nl0cwjs8.jpg" width = "100%"  alt="fir.im" align=center />
 
-#### 3. 查看BugHD project ID
 
-**作用：** 判断上传到具体到哪个 BugHD 的项目
-
-**注意：** 如果填写过 BugHD apiTOken 后，该选项为必填
-
-**查看方法：** 请访问 [BugHD Projects](http://bughd.com/projects)，登录后找到你要上传符号表的项目后，进入该项目， 并选择 *项目设置* 选项卡，进行查看。
-
-<img src="http://ww1.sinaimg.cn/large/6f260d67jw1exvzzdv0dcj20n50ccjs5.jpg" width = "100%"  alt="fir.im" align=center />
 
 ###开始使用
 
@@ -129,5 +119,4 @@ fir.im Gradle 插件帮助开发者使用一条指令发布应用至 fir.im，�
 
 > - publishApkXXX 任务依附于 gradle 的 assembleTask，**如果要上传Release版本需要配置正式版本的签名。意味着需要在工程的 build.gradle 的 buildTypes 中添加 release 配置签名信息并对 APK 签名，该插件才会正常运行，否则上传的apk是unsign-release，会导致手机无法安装**。
 
-> - 使用 Gradle Plugin 上传符号表到 BugHD 时，需要在工程的 build.gradle 的 buildTypes 中添加 release 打开混淆配置，才会自动上传符号表到 BugHD。
 
